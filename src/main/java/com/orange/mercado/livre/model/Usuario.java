@@ -14,7 +14,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-public class Usuario implements UserDetails {
+public class Usuario implements UserDetails{
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -22,7 +22,7 @@ public class Usuario implements UserDetails {
 	private Long id;
 
 	@NotBlank
-	private String login;
+	private String email;
 	@NotBlank
 	private String senha;
 	@NotNull
@@ -33,10 +33,19 @@ public class Usuario implements UserDetails {
 
 	}
 
-	public Usuario(@NotBlank String login, @NotBlank String senha) {
+	public Usuario(@NotBlank String email, @NotBlank String senha) {
 		super();
-		this.login = login;
+		this.email = email;
 		this.senha = senha;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", email=" + email + ", senha=" + senha + ", instCadastro=" + instCadastro + "]";
 	}
 
 	@Override
@@ -46,12 +55,13 @@ public class Usuario implements UserDetails {
 
 	@Override
 	public String getPassword() {
+		// TODO Auto-generated method stub
 		return this.senha;
 	}
 
 	@Override
 	public String getUsername() {
-		return this.login;
+		return this.email;
 	}
 
 	@Override

@@ -13,15 +13,15 @@ public class UsuarioForm {
 
 	@Email
 	@NotBlank
-	@UniqueValue(domainClass = Usuario.class, fieldName = "login")
-	private String login;
+	@UniqueValue(domainClass = Usuario.class, fieldName = "email")
+	private String email;
 	@Length(min = 6)
 	@NotBlank
 	private String senha;
 
-	public UsuarioForm(@Email @NotBlank String login, @NotBlank String senha) {
+	public UsuarioForm(@Email @NotBlank String email, @NotBlank String senha) {
 		super();
-		this.login = login;
+		this.email = email;
 		this.senha = senha;
 	}
 
@@ -29,7 +29,7 @@ public class UsuarioForm {
 
 		String hashSenha = new BCryptPasswordEncoder().encode(senha);
 
-		return new Usuario(this.login, hashSenha);
+		return new Usuario(this.email, hashSenha);
 	}
 
 }

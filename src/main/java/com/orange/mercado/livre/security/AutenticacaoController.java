@@ -1,4 +1,4 @@
-package com.orange.mercado.livre.controller;
+package com.orange.mercado.livre.security;
 
 import javax.validation.Valid;
 
@@ -12,10 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.orange.mercado.livre.dto.TokenDto;
-import com.orange.mercado.livre.form.LoginForm;
-import com.orange.mercado.livre.service.TokenService;
 
 @RestController
 @RequestMapping("/auth")

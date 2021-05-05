@@ -1,4 +1,4 @@
-package com.orange.mercado.livre.model;
+package com.orange.mercado.livre.cadastraUsuario;
 
 import java.time.LocalDateTime;
 import java.util.Collection;

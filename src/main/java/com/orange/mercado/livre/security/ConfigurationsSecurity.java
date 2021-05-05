@@ -14,9 +14,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.orange.mercado.livre.repository.UsuarioRepository;
-import com.orange.mercado.livre.service.AutenticacaoService;
-import com.orange.mercado.livre.service.TokenService;
+import com.orange.mercado.livre.cadastraUsuario.UsuarioRepository;
 
 @EnableWebSecurity
 @Configuration
@@ -51,6 +49,7 @@ public class ConfigurationsSecurity extends WebSecurityConfigurerAdapter {
 		// Sintaxe para liberação de acesso definindo o método (GET), e a URI da API
 
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/usuarios").permitAll()
+				.antMatchers("/h2-console/**").permitAll()
 				.antMatchers(HttpMethod.POST, "/auth").permitAll().anyRequest().authenticated().and().csrf().disable()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				.addFilterBefore(new AutenticacaoViaTokenFilter(tokenService, usuarioRepository),
@@ -59,7 +58,7 @@ public class ConfigurationsSecurity extends WebSecurityConfigurerAdapter {
 
 		// Configuração para liberar acesso ao H2
 
-		/* http.headers().frameOptions().sameOrigin(); */
+		 http.headers().frameOptions().sameOrigin(); 
 
 	}
 

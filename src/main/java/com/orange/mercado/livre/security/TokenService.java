@@ -1,4 +1,4 @@
-package com.orange.mercado.livre.service;
+package com.orange.mercado.livre.security;
 
 import java.util.Date;
 
@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import com.orange.mercado.livre.model.Usuario;
+import com.orange.mercado.livre.cadastraUsuario.Usuario;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

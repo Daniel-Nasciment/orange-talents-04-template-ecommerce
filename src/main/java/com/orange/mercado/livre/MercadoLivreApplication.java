@@ -12,6 +12,11 @@ public class MercadoLivreApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MercadoLivreApplication.class, args);
+	
+		/*
+		 * COMO DESCOBRIR A HASH DE UMA SENHA BCRYPT
+		 * System.out.println(new BCryptPasswordEncoder().encode("123456"));
+		 */	
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.orange.mercado.livre.service;
+package com.orange.mercado.livre.security;
 
 import java.util.Optional;
 
@@ -8,8 +8,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.orange.mercado.livre.model.Usuario;
-import com.orange.mercado.livre.repository.UsuarioRepository;
+import com.orange.mercado.livre.cadastraUsuario.Usuario;
+import com.orange.mercado.livre.cadastraUsuario.UsuarioRepository;
 
 @Service
 public class AutenticacaoService implements UserDetailsService {

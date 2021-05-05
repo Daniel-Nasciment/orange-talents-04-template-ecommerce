@@ -1,4 +1,4 @@
-package com.orange.mercado.livre.form;
+package com.orange.mercado.livre.security;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 

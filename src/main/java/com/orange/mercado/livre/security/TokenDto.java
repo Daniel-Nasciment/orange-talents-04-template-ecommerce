@@ -1,4 +1,4 @@
-package com.orange.mercado.livre.dto;
+package com.orange.mercado.livre.security;
 
 public class TokenDto {
 

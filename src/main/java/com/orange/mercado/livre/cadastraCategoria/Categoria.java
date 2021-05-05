@@ -1,4 +1,4 @@
-package com.orange.mercado.livre.model;
+package com.orange.mercado.livre.cadastraCategoria;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

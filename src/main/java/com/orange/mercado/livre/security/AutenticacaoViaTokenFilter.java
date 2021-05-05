@@ -11,9 +11,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.orange.mercado.livre.model.Usuario;
-import com.orange.mercado.livre.repository.UsuarioRepository;
-import com.orange.mercado.livre.service.TokenService;
+import com.orange.mercado.livre.cadastraUsuario.Usuario;
+import com.orange.mercado.livre.cadastraUsuario.UsuarioRepository;
 
 //Essa extenssão OncePerRequestFilter é chamado uma unica vez a cada requisição
 public class AutenticacaoViaTokenFilter extends OncePerRequestFilter {

@@ -1,4 +1,4 @@
-package com.orange.mercado.livre.form;
+package com.orange.mercado.livre.cadastraUsuario;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -6,7 +6,6 @@ import javax.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.orange.mercado.livre.model.Usuario;
 import com.orange.mercado.livre.validator.UniqueValue;
 
 public class UsuarioForm {

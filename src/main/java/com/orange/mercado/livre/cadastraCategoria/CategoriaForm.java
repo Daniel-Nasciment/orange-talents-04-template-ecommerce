@@ -1,10 +1,8 @@
-package com.orange.mercado.livre.form;
+package com.orange.mercado.livre.cadastraCategoria;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 
-import com.orange.mercado.livre.model.Categoria;
-import com.orange.mercado.livre.repository.CategoriaRepository;
 import com.orange.mercado.livre.validator.ExistsId;
 import com.orange.mercado.livre.validator.UniqueValue;
 
@@ -26,14 +24,14 @@ public class CategoriaForm {
 	}
 
 	public Categoria converterCategoria(CategoriaRepository categoriaRepository) {
-		
+
 		Categoria categoria = new Categoria(this.nome);
 
 		if (idCatMae != null) {
 			Categoria categoriaMae = categoriaRepository.findById(idCatMae).get();
 			categoria.setMae(categoriaMae);
 		}
-		
+
 		return categoria;
 	}
 }

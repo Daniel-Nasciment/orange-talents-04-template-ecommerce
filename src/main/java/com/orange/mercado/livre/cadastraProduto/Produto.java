@@ -24,6 +24,7 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.util.Assert;
 
 import com.orange.mercado.livre.cadastraCategoria.Categoria;
+import com.orange.mercado.livre.cadastraUsuario.Usuario;
 
 @Entity
 public class Produto {
@@ -54,6 +55,9 @@ public class Produto {
 	@OneToMany(mappedBy = "produto", cascade = CascadeType.PERSIST)
 	private Set<CaracteristicaProduto> caracteristicas = new HashSet<>();
 
+	@OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
+	private Set<ImagemProduto> imagens = new HashSet<>();
+
 	@NotNull
 	private LocalDateTime instCadastro = LocalDateTime.now();
 
@@ -73,8 +77,7 @@ public class Produto {
 		this.categoria = categoria;
 		this.caracteristicas.addAll(caracteristicas.stream().map(caracteristica -> caracteristica.toModel(this))
 				.collect(Collectors.toSet()));
-		
-		
+
 		Assert.isTrue(this.caracteristicas.size() >= 3, "Todo produto precisa ter no mínimo 3 ou mais características");
 	}
 
@@ -82,7 +85,7 @@ public class Produto {
 	public String toString() {
 		return "Produto [id=" + id + ", nome=" + nome + ", valor=" + valor + ", qtdDisponivel=" + qtdDisponivel
 				+ ", descricao=" + descricao + ", categoria=" + categoria + ", caracteristicas=" + caracteristicas
-				+ ", instCadastro=" + instCadastro + "]";
+				+ ", imagens=" + imagens + ", instCadastro=" + instCadastro + "]";
 	}
 
 	@Override
@@ -108,6 +111,29 @@ public class Produto {
 		} else if (!nome.equals(other.nome))
 			return false;
 		return true;
+	}
+
+	/*
+	 * public boolean pertenceAoUsuario(Usuario possivelDono) { return
+	 * this.dono.equals(possivelDono); }
+	 */
+	public void associaImagens(Set<String> links) {
+		Set<ImagemProduto> imagens = links.stream().map(link -> new ImagemProduto(this, link))
+				.collect(Collectors.toSet());
+
+		this.imagens.addAll(imagens);
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public BigDecimal getValor() {
+		return valor;
 	}
 
 }

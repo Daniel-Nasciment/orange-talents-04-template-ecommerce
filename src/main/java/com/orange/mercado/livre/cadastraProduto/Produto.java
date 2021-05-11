@@ -5,6 +5,9 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
@@ -14,6 +17,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -24,6 +28,7 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.util.Assert;
 
 import com.orange.mercado.livre.cadastraCategoria.Categoria;
+import com.orange.mercado.livre.cadastraPergunta.PerguntaProduto;
 import com.orange.mercado.livre.cadastraUsuario.Usuario;
 
 @Entity
@@ -65,6 +70,12 @@ public class Produto {
 
 	@NotNull
 	private LocalDateTime instCadastro = LocalDateTime.now();
+
+	//SortedSet: Serve para ordenar, mas devo me lembrar de colocar o @OrderBy
+	
+	@OneToMany(mappedBy = "produto")
+	@OrderBy("titulo asc")
+	private SortedSet<PerguntaProduto> perguntas = new TreeSet<>();
 
 	@Deprecated
 	public Produto() {
@@ -144,6 +155,31 @@ public class Produto {
 
 	public BigDecimal getValor() {
 		return valor;
+	}
+
+	public Set<CaracteristicaProduto> getCaracteristicas() {
+		return caracteristicas;
+	}
+
+	public <T> Set<T> mapCaracteristicas(
+			// @Param CaracteristicaProduto = entrada
+			// @Param t = saída
+			// @Param funcaoMapeadora = nome da função
+			Function<CaracteristicaProduto, T> funcaoMapeadora) {
+		return this.caracteristicas.stream().map(funcaoMapeadora).collect(Collectors.toSet());
+	}
+
+	public <T> Set<T> mapLinksImagens(Function<ImagemProduto, T> funcaoMapeadora) {
+		return this.imagens.stream().map(funcaoMapeadora).collect(Collectors.toSet());
+
+	}
+
+	// Diferenças entre set e SortedSet ^ |
+	
+	//Para carantir que quando mapear seja algo comparavel
+	public <T extends Comparable<T>> SortedSet<T> mapPerguntas(Function<PerguntaProduto, T> funcaoMapeadora) {
+		return this.perguntas.stream().map(funcaoMapeadora).collect(Collectors.toCollection(TreeSet::new));
+
 	}
 
 }

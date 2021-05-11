@@ -48,17 +48,17 @@ public class ConfigurationsSecurity extends WebSecurityConfigurerAdapter {
 
 		// Sintaxe para liberação de acesso definindo o método (GET), e a URI da API
 
-		http.authorizeRequests().antMatchers(HttpMethod.POST, "/usuarios").permitAll()
-				.antMatchers("/h2-console/**").permitAll()
-				.antMatchers(HttpMethod.POST, "/auth").permitAll().anyRequest().authenticated().and().csrf().disable()
-				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/usuarios").permitAll().antMatchers("/h2-console/**")
+				.permitAll().antMatchers(HttpMethod.POST, "/auth").permitAll().antMatchers(HttpMethod.GET, "/detalhes/*")
+				.permitAll().anyRequest().authenticated().and().csrf().disable().sessionManagement()
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				.addFilterBefore(new AutenticacaoViaTokenFilter(tokenService, usuarioRepository),
 						UsernamePasswordAuthenticationFilter.class);
 		;
 
 		// Configuração para liberar acesso ao H2
 
-		 http.headers().frameOptions().sameOrigin(); 
+		http.headers().frameOptions().sameOrigin();
 
 	}
 

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.orange.mercado.livre.cadastraCategoria.CategoriaRepository;
+import com.orange.mercado.livre.cadastraUsuario.Usuario;
 import com.orange.mercado.livre.cadastraUsuario.UsuarioRepository;
 
 @RestController
@@ -43,8 +44,10 @@ public class ProdutoController {
 
 	@PostMapping
 	public String cadastraProduto(@RequestBody @Valid ProdutoForm produtoForm) {
+		
+		Usuario dono = usuarioRepository.findByEmail("daniel@email.com").get();	
 
-		Produto produto = produtoForm.converterProduto(categoriaRepository);
+		Produto produto = produtoForm.converterProduto(categoriaRepository, dono);
 
 		produtoRepository.save(produto);
 

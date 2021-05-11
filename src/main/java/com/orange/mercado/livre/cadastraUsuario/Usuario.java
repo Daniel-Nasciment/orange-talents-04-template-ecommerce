@@ -43,6 +43,10 @@ public class Usuario implements UserDetails {
 		return id;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+	
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", email=" + email + ", senha=" + senha + ", instCadastro=" + instCadastro + "]";

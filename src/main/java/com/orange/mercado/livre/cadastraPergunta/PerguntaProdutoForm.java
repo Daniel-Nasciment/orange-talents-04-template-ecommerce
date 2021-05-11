@@ -42,12 +42,11 @@ public class PerguntaProdutoForm {
 		return "PerguntaProdutoForm [titulo=" + titulo + ", usuario=" + usuario + "]";
 	}
 
-	public PerguntaProduto converterPergunta(UsuarioRepository usuarioRepository, ProdutoRepository produtoRepository) {
+	public PerguntaProduto converterPergunta(UsuarioRepository usuarioRepository, ProdutoRepository produtoRepository, Usuario interessada) {
 
-		Usuario usuario = usuarioRepository.findById(this.usuario).get();
 		Produto produto = produtoRepository.findById(this.produto).get();
 
-		return new PerguntaProduto(this.titulo, produto, usuario);
+		return new PerguntaProduto(this.titulo, produto, interessada);
 	}
 
 }

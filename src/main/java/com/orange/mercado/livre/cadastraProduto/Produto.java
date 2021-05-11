@@ -51,6 +51,11 @@ public class Produto {
 	@ManyToOne
 	private Categoria categoria;
 
+	@NotNull
+	@Valid
+	@ManyToOne
+	private Usuario dono;
+
 	// Sempre que cadastrar um novo produto, vaicadastrar junto us caracteristicas
 	@OneToMany(mappedBy = "produto", cascade = CascadeType.PERSIST)
 	private Set<CaracteristicaProduto> caracteristicas = new HashSet<>();
@@ -67,7 +72,7 @@ public class Produto {
 	}
 
 	public Produto(@NotBlank String nome, @NotNull @Min(0) BigDecimal valor, @NotNull @Min(0) Integer qtdDisponivel,
-			@NotBlank @Length(max = 1000) String descricao, Categoria categoria,
+			@NotBlank @Length(max = 1000) String descricao, Categoria categoria, @NotNull Usuario dono,
 			@Size(min = 3) @Valid Collection<CaracteristicaForm> caracteristicas) {
 		super();
 		this.nome = nome;
@@ -75,6 +80,7 @@ public class Produto {
 		this.qtdDisponivel = qtdDisponivel;
 		this.descricao = descricao;
 		this.categoria = categoria;
+		this.dono = dono;
 		this.caracteristicas.addAll(caracteristicas.stream().map(caracteristica -> caracteristica.toModel(this))
 				.collect(Collectors.toSet()));
 
@@ -130,6 +136,10 @@ public class Produto {
 
 	public String getNome() {
 		return nome;
+	}
+
+	public Usuario getDono() {
+		return dono;
 	}
 
 	public BigDecimal getValor() {

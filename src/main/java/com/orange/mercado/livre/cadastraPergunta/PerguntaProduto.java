@@ -51,5 +51,13 @@ public class PerguntaProduto {
 		return "PerguntaProduto [id=" + id + ", titulo=" + titulo + ", instPerguntado=" + instPerguntado + ", produto="
 				+ produto + ", usuario=" + usuario + "]";
 	}
+	
+	public Usuario getInteressada() {
+		return usuario;
+	}
+
+	public Usuario getDonoProduto() {
+		return produto.getDono();
+	}
 
 }

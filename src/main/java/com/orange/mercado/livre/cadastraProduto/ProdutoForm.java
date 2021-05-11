@@ -16,6 +16,7 @@ import org.hibernate.validator.constraints.Length;
 
 import com.orange.mercado.livre.cadastraCategoria.Categoria;
 import com.orange.mercado.livre.cadastraCategoria.CategoriaRepository;
+import com.orange.mercado.livre.cadastraUsuario.Usuario;
 import com.orange.mercado.livre.validator.ExistsId;
 
 public class ProdutoForm {
@@ -72,11 +73,12 @@ public class ProdutoForm {
 		this.caracteristicas = caracteristicas;
 	}
 
-	public Produto converterProduto(CategoriaRepository categoriaRepository) {
+	public Produto converterProduto(CategoriaRepository categoriaRepository, Usuario dono) {
 
 		Categoria categoria = categoriaRepository.findById(idCategoria).get();
 
-		return new Produto(this.nome, this.valor, this.qtdDisponivel, this.descricao, categoria, this.caracteristicas);
+		return new Produto(this.nome, this.valor, this.qtdDisponivel, this.descricao, categoria, dono,
+				this.caracteristicas);
 	}
 
 	public Set<String> buscaCaracteristicasIguais() {
